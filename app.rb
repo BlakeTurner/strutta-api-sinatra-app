@@ -3,29 +3,13 @@ require 'sinatra'
 require 'strutta-api'
 require 'json'
 
+# Rename config_template.rb to config.rb
+require_relative 'config'
+
 # Dev only
 require 'byebug'
 
-# Allow localhost CORS for easy local deployment
-set :protection, false
-before do
-  content_type :json
-  headers 'Access-Control-Allow-Origin' => '*', 'Access-Control-Allow-Methods' => ['OPTIONS', 'POST'], 'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept'
-end
-
-# Get your API token from api.strutta.com
-# STRUTTA_PRIVATE_TOKEN = 'mystruttaprivatetoken'
-# STRUTTA_GAME_ID = ''
-STRUTTA_PRIVATE_TOKEN = 'becf267a11366a5b39d8ea9f5a99e63f'
-STRUTTA_GAME_ID = 74
-
 # REGISTRATION
-
-# Necessary for localhost CORS
-options '/register' do
-  200
-end
-
 post '/register' do
   # Create participant definition from POST data
   data = JSON.parse request.body.read
@@ -40,12 +24,6 @@ post '/register' do
 end
 
 # RENEW PARTICIPANT TOKEN
-
-# Necessary for localhost CORS
-options '/renew' do
-  200
-end
-
 post '/renew' do
   # Create participant definition from POST data
   data = JSON.parse request.body.read
