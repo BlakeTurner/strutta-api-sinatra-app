@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Strutta API Dummy Server Setup</title>
+    <link rel="stylesheet" type="text/css" href="setup.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="prettyprint.js"></script>
+    <script src="setup.js"></script>
+
+  </head>
+  <body>
+    <h1>Setup</h1>
+    <p>Since many of the required fields for Games, Rounds, and Flow are dynamic, this simple page helps build them with little effort.</p>
+
+
+    <div class="step step-1" data-key="game" data-url='create-game'>
+      <hr>
+      <h2>Step 1: Create Game</h2>
+
+      <p class="description">Your game is defined in definitions/game.rb. Feel free to change any of the values before submitting</p>
+      <a class="action create-game" href="#">Create Game</a>
+      <div class="result">
+        <h4 class="message">Game Created!</h4>
+      </div>
+
+    </div>
+
+    <div class="step step-2 hidden">
+      <hr>
+      <h2>Step 2: Record Game ID</h2>
+
+      <p class="description">You Game ID is integral to the functionality of the Sinatra server. Add the Game ID to STRUTTA_GAME_ID in config.rb, then restart the server (Ctrl+C to stop, ruby app.rb to start).</p>
+      <a class="action create-game" href="#">Done!</a>
+      <div class="result">
+        <h4 class="message">Configuration Updated!</h4>
+      </div>
+
+    </div>
+
+
+    <div class="step step-3 hidden" data-key="rounds" data-url='create-rounds'>
+      <hr>
+      <h2>Step 3: Create Rounds</h2>
+
+      <p class="description">Rounds require a Game ID to be created. Rounds are defined in definitions/rounds.rb.</p>
+      <a class="action create-game" href="#">Create Rounds</a>
+      <div class="result">
+        <h4 class="message">Rounds Created!</h4>
+      </div>
+    </div>
+
+
+    <div class="step step-4 hidden" data-key="flow" data-url='create-flow'>
+      <hr>
+      <h2>Step 4: Create Flow</h2>
+
+      <p class="description">Flow requires Game and Rounds to have been created. View POST /create-flow in app.rb for an example of the flow definition.</p>
+      <a class="action create-game" href="#">Create Flow</a>
+      <div class="result">
+        <h4 class="message">Flow Created!</h4>
+      </div>
+    </div>
+  </body>
+</html>
