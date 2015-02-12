@@ -42,10 +42,8 @@ end
 # CREATE FLOW
 post '/create-flow' do
   content_type :json
-
   data = JSON.parse request.body.read
-
-  flow = [
+  flow_definition = [
     {
       id: data['submission_id'],
       pass_round: data['random_draw_id'],
@@ -60,10 +58,10 @@ post '/create-flow' do
     }
   ]
   strutta = Strutta::API.new STRUTTA_PRIVATE_TOKEN
-  strutta.games(STRUTTA_GAME_ID).flow.create(definition: flow).to_json
+  strutta.games(STRUTTA_GAME_ID).flow.create(definition: flow_definition).to_json
 end
 
-# REGISTRATION
+# CREATE STRUTTA PARTICIPANT
 post '/register' do
   content_type :json
 
@@ -94,10 +92,11 @@ post '/renew' do
 
   # Ideally you'd have your user's Strutta Participant ID stored in a DB, but if you don't here's how to get it
 
-  # Get participant by email, renew token if needed
+  # Get participant by email
   strutta = Strutta::API.new STRUTTA_PRIVATE_TOKEN
   participant = strutta.games(STRUTTA_GAME_ID).participants.search(email: data['email'])
 
+  # Renew token if needed
   if participant['token_expired']
     token = strutta.games(STRUTTA_GAME_ID).participants(participant['id']).token_renew(duration: 60 * 60)
     participant['token'] = token['token']

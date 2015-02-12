@@ -2,7 +2,7 @@ $(document).ready(function() {
   // Initialize stop count
   var step = 1;
 
-  // Interlligible flow data
+  // Intelligible flow data
   var flowData = function() {
     var roundData = JSON.parse(localStorage.rounds);
     return {
@@ -32,6 +32,7 @@ $(document).ready(function() {
         // Only Flow requires dynamic data
         var postData = localStorage.hasOwnProperty('rounds') && key == 'flow' ? flowData() : {};
 
+        // Post to url defined in data-url attribute
         $.post($container.attr('data-url'), JSON.stringify(postData), function(data) {
           // Store results locally
           localStorage[key] = data;
