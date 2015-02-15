@@ -15,7 +15,7 @@ require_relative 'definitions/rounds.rb'
 require 'byebug'
 
 # SETUP
-get '/setup' do
+get '/' do
   erb :setup
 end
 
